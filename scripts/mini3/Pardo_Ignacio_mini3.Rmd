@@ -1,0 +1,25 @@
+---
+title: "Mini-entrega 3: P=NP?"
+author: "Ignacio Pardo"
+date: "`r Sys.Date()`"
+output: 
+    pdf_document
+---
+
+## Consigna
+
+Dado un grafo $G = (V, E)$ y un entero $k \in Z_{+}$, un k-coloreo de $G$ es una función $c : V \rightarrow {1,...,k}$ tal que $c(i) \neq c(j)$ para todo $ij \in E$. Es decir, un coloreo es una asignación de un número entre $1$ y $k$ (llamado un color en este contexto) a cada vértice de modo tal que todo par de vértices vecinos reciba colores distintos. Dado un grafo $G$ y un entero $k$, la versión de decisión del problema de coloreo consiste en determinar si $G$ admite un k-coloreo o no. Se sabe que este problema es NP-completo.
+
+Consideremos el siguiente algoritmo polinomial para $k = 2$. Tomamos un vértice $v \in V$ cualquiera y recorremos el grafo con BFS partiendo desde $v$. Coloreamos con color $1$ a todos los vértices con distancia impar a $v$, y con color $2$ a todos los vértices con distancia par a $v$. Si luego de realizar este procedimiento quedan dos vértices vecinos con el mismo color, entonces retornamos false diciendo que $G$ no es 2-coloreable. En cambio, si todo par de vértices vecinos tiene colores distintos, entonces retornamos true diciendo que $G$ sí es 2-coloreable.
+
+Este algoritmo es lineal, con lo cual podemos resolver la versión de decisión del problema de 2-coloreo en tiempo polinomial. Por lo tanto, P = NP!
+
+¿Qué error hay en este argumento?
+
+## Solución
+
+El error en este argumento está en asumir que si bien el algoritmo funciona para $k = 2$ (2-coloreable sobre grafos bipartitos) no se puede generalizar este a valores mayores de $k$. En este argumento se demuestra que el problema de 2-coloreo es solucionable en tiempo polinomial, pero no que k-coloreo es reducible en tiempo polinomial a 2-coloreo para todo $k \in Z_{+}$. 
+
+Para el argumento concluir esto, se debería demostrar que el problema de k-coloreo $\leq_{p}$ 2-coloreo para todo $k \in Z_{+}$ lo cual este argumento no logra. De esta forma se podrían convertir instancias de k-coloreo en instancias de 2-coloreo y resolverlas todo en tiempo polinomial, lo cual implicaría que k-coloreo $\in$ P para todo $k \in Z_{+}$ y, como k-coloreo es NP-completo, entonces P = NP.
+
+Resolver el problema de k-coloreo de manera eficiente sigue siendo un problema abierto y no hay garantía de que exista un algoritmo polinomial similar para valores mayores de $k$. Por lo tanto, no podemos concluir que P = NP :(
